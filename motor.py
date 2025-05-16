@@ -10,8 +10,8 @@ class MotorCredito(KnowledgeEngine):
         self.errores = []
 
     @Rule(OR(
-        Persona(nombre=P(lambda n: not n.strip())),
-        Persona(apellido=P(lambda a: not a.strip())),
+        Persona(nombre=P(lambda n: n == '' or not n.strip())),
+        Persona(apellido=P(lambda a: a == '' or  not a.strip())),
     ))
     def required_fields(self):
         self.errores.append("❌ Todos los campos son obligatorios.")
