@@ -11,7 +11,7 @@ st.title("Autorizacion credito hipotecario")
 
 nombre = st.text_input("Nombre")
 apellido = st.text_input("Apellido")
-edad = st.number_input("Edad", min_value=18)
+edad = st.number_input("Edad", step=1)
 sueldo = st.number_input("Sueldo", step=50000)
 antiguedad = st.number_input("Antigüedad (meses)", step=1)
 

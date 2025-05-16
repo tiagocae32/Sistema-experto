@@ -20,11 +20,11 @@ class MotorCredito(KnowledgeEngine):
     @Rule(Persona(edad=P(lambda e: e < 18)))
     def es_menor(self):
         self.errores.append("❌ Es menor de edad.")
-
-    @Rule(Persona(antiguedad=P(lambda a: a < 12)))
-    def antiguedad_menor(self):
-        self.errores.append("❌ No cumples con la antigüedad mínima.")
     
     @Rule(Persona(sueldo=P(lambda s: s < 1000)))
     def sueldo_menor(self):
         self.errores.append("❌ No cumples con el sueldo minimo.")
+    
+    @Rule(Persona(antiguedad=P(lambda a: a < 12)))
+    def antiguedad_menor(self):
+        self.errores.append("❌ No cumples con la antigüedad mínima.")
