@@ -11,7 +11,6 @@ class MotorCredito(KnowledgeEngine):
 
     @Rule(OR(
     Persona(nombre=P(lambda n: n == '' or not n.strip())),
-    Persona(apellido=P(lambda a: a == '' or not a.strip())),
     Persona(edad=P(lambda e: e is None)),
     Persona(sueldo=P(lambda s: s is None)),
     Persona(antiguedad=P(lambda a: a is None))

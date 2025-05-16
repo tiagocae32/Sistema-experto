@@ -1,13 +1,19 @@
+import collections
+import collections.abc
+if not hasattr(collections, 'Mapping'):
+    collections.Mapping = collections.abc.Mapping
+
 import streamlit as st
 from motor import MotorCredito, Persona
 
 st.title("Autorización crédito hipotecario")
 
 nombre = st.text_input("Nombre")
-apellido = st.text_input("Apellido")
 edad_str = st.text_input("Edad")
+antiguedad_str = st.text_input("Antigüedad en su trabajo (meses)")
 sueldo_str = st.text_input("Sueldo")
-antiguedad_str = st.text_input("Antigüedad (meses)")
+valor_propiedad_str = st.text_input('Valor Propiedad')
+años_devolucion_str = st.text_input("En cuantos años queres devolver el prestamo?")
 
 def to_int(value):
     try:
@@ -17,17 +23,20 @@ def to_int(value):
 
 edad = to_int(edad_str)
 sueldo = to_int(sueldo_str)
+valor_propiedad = to_int(valor_propiedad_str)
 antiguedad = to_int(antiguedad_str)
+años_devolucion = to_int(años_devolucion_str)
 
 if st.button("Evaluar"):
     engine = MotorCredito()
     engine.reset()
     engine.declare(Persona(
         nombre=nombre,
-        apellido=apellido,
         edad=edad,
         sueldo=sueldo,
-        antiguedad=antiguedad
+        valor_propiedad=valor_propiedad,
+        antiguedad=antiguedad,
+        años_devolucion = años_devolucion
     ))
     engine.run()
 
