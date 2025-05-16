@@ -10,14 +10,16 @@ st.set_page_config(page_title="Sistema Experto - Edad", layout="centered")
 st.title("Autorizacion credito hipotecario")
 
 nombre = st.text_input("Nombre")
-edad = st.number_input("Edad", min_value=0, max_value=120)
-sueldo = st.number_input("sueldo", min_value=0)
-antiguedad = st.number_input("antiguedad(meses)", min_value=0)
+apellido = st.text_input("Apellido")
+edad = st.number_input("Edad", min_value=18)
+sueldo = st.number_input("Sueldo", step=50000)
+antiguedad = st.number_input("Antigüedad (meses)", step=1)
+
 
 if st.button("Evaluar"):
     engine = MotorCredito()
     engine.reset()
-    engine.declare(Persona(nombre=nombre, edad=edad, sueldo=sueldo, antiguedad=antiguedad))
+    engine.declare(Persona(nombre=nombre, apellido=apellido, edad=edad, sueldo=sueldo, antiguedad=antiguedad))
     engine.run()
 
     st.subheader("Resultado")
