@@ -6,6 +6,7 @@ if not hasattr(collections, 'Mapping'):
 import streamlit as st
 from motor import MotorCredito, Persona
 
+st.set_page_config(page_title="Evaluador de Créditos", layout="centered")
 st.title("Autorización crédito hipotecario")
 
 nombre = st.text_input("Nombre")
