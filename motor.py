@@ -8,16 +8,7 @@ class MotorCredito(KnowledgeEngine):
     def __init__(self):
         super().__init__()
         self.errores = []
-
-    @Rule(OR(
-    Persona(nombre=P(lambda n: n == '' or not n.strip())),
-    Persona(edad=P(lambda e: e is None)),
-    Persona(sueldo=P(lambda s: s is None)),
-    Persona(antiguedad=P(lambda a: a is None))
-))
-    def required_fields(self):
-        self.errores.append("❌ Todos los campos son obligatorios.")
-        self.halt()
+        self.prestamo_aprobado = []
 
 
     @Rule(Persona(edad=P(lambda e: e is not None and e < 18)))
@@ -31,3 +22,11 @@ class MotorCredito(KnowledgeEngine):
     @Rule(Persona(antiguedad=P(lambda a: a is not None and a < 12)))
     def antiguedad_menor(self):
         self.errores.append("❌ No cumples con la antigüedad mínima.")
+
+    @Rule(AND(
+        Persona(edad=P(lambda e: e > 18)),
+        Persona(sueldo=P(lambda s: s > 1000)),
+        Persona(antiguedad=P(lambda a: a > 12))
+    ))
+    def prestamo_aprobado(self):
+        self.prestamo_aprobado.append("✅ Prestamo Aprobado")
