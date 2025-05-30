@@ -7,68 +7,61 @@ import streamlit as st
 from utils import *
 from motor import MotorCredito, Persona
 
+class SistemaExperto():
 
-def set_titles():
-    st.set_page_config(page_title="Evaluador de Créditos", layout="centered")
-    st.title("Autorización crédito hipotecario")
+    def set_titles(self):
+        st.set_page_config(page_title="Evaluador de Créditos", layout="centered")
+        st.title("Autorización crédito hipotecario")
 
-def required_fields():
-    errores = []
-    if not nombre.strip() or edad is None or sueldo is None or antiguedad is None:
-        errores.append("❌ Todos los campos son obligatorios.")
-        return errores, []
-
-
-def get_inputs():
-    nombre = st.text_input("Nombre")
-    edad_str = st.text_input("Edad")
-    antiguedad_str = st.text_input("Antigüedad en su trabajo (meses)")
-    sueldo_str = st.text_input("Sueldo")
-    valor_propiedad_str = st.text_input('Valor Propiedad')
-    años_devolucion_str = st.selectbox("¿En cuántos años querés devolver el préstamo?", ["20", "25", "30"])
-    return nombre, edad_str, antiguedad_str, sueldo_str, valor_propiedad_str, años_devolucion_str
+    def get_inputs(self):
+        nombre = st.text_input("Nombre")
+        edad_str = st.text_input("Edad")
+        antiguedad_str = st.text_input("Antigüedad en su trabajo (meses)")
+        sueldo_str = st.text_input("Sueldo")
+        valor_propiedad_str = st.text_input('Valor Propiedad')
+        años_devolucion_str = st.selectbox("¿En cuántos años querés devolver el préstamo?", ["20", "25", "30"])
+        return nombre, edad_str, antiguedad_str, sueldo_str, valor_propiedad_str, años_devolucion_str
 
 
-def evaluar_credito(nombre, edad_str, antiguedad_str, sueldo_str, valor_propiedad_str, años_devolucion_str):
-    campos = {
-        "edad": to_int(edad_str),
-        "sueldo": to_int(sueldo_str),
-        "valor_propiedad": to_int(valor_propiedad_str),
-        "antiguedad": to_int(antiguedad_str),
-        "nombre": nombre.strip()
-    }
+    def evaluar_credito(self,nombre, edad_str, antiguedad_str, sueldo_str, valor_propiedad_str, años_devolucion_str):
+        campos = {
+            "edad": to_int(edad_str),
+            "sueldo": to_int(sueldo_str),
+            "valor_propiedad": to_int(valor_propiedad_str),
+            "antiguedad": to_int(antiguedad_str),
+            "nombre": nombre.strip()
+        }
 
-    # Validacion de campos
-    if any(valor in (None, '') for valor in campos.values()):
-        return ["❌ Todos los campos son obligatorios."], []
+        # Validacion de campos
+        if any(valor in (None, '') for valor in campos.values()):
+            return ["❌ Todos los campos son obligatorios."], []
 
-    engine = MotorCredito()
-    engine.reset()
-    engine.declare(Persona(
-        nombre=campos["nombre"],
-        edad=campos["edad"],
-        sueldo=campos["sueldo"],
-        valor_propiedad=campos["valor_propiedad"],
-        antiguedad=campos["antiguedad"],
-        años_devolucion=años_devolucion_str
-    ))
-    engine.run()
-    return engine.errores, engine.prestamo_aprobado
+        engine = MotorCredito()
+        engine.reset()
+        engine.declare(Persona(
+            nombre=campos["nombre"],
+            edad=campos["edad"],
+            sueldo=campos["sueldo"],
+            valor_propiedad=campos["valor_propiedad"],
+            antiguedad=campos["antiguedad"],
+            años_devolucion=años_devolucion_str
+        ))
+        engine.run()
+        return engine.errores, engine.prestamo_aprobado
 
-def main():
-    set_titles()
-    nombre, edad_str, antiguedad_str, sueldo_str, valor_propiedad_str, años_devolucion_str = get_inputs()
+    def main(self):
+        self.set_titles()
+        nombre, edad_str, antiguedad_str, sueldo_str, valor_propiedad_str, años_devolucion_str = self.get_inputs()
 
-    if st.button("Evaluar"):
-        errores, prestamo_aprobado = evaluar_credito(nombre, edad_str, antiguedad_str, sueldo_str, valor_propiedad_str, años_devolucion_str)
-        st.subheader("Resultado")
-        if len(errores) > 0:
-            for error in errores:
-                st.write(error)
-        else:
-            for info_credito in prestamo_aprobado:
-                st.write(info_credito)
+        if st.button("Evaluar"):
+            errores, prestamo_aprobado = self.evaluar_credito(nombre, edad_str, antiguedad_str, sueldo_str, valor_propiedad_str, años_devolucion_str)
+            st.subheader("Resultado")
+            if len(errores) > 0:
+                for error in errores:
+                    st.write(error)
+            else:
+                for info_credito in prestamo_aprobado:
+                    st.write(info_credito)
 
-
-if __name__ == "__main__":
-    main()
+sistema_experto = SistemaExperto()
+sistema_experto.main()
