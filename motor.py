@@ -22,11 +22,25 @@ class MotorCredito(KnowledgeEngine):
     @Rule(Persona(antiguedad=P(lambda a: a is not None and a < 12)))
     def antiguedad_menor(self):
         self.errores.append("❌ No cumples con la antigüedad mínima.")
-
+        
     @Rule(AND(
         Persona(edad=P(lambda e: e > 18)),
-        Persona(sueldo=P(lambda s: s > 1000)),
-        Persona(antiguedad=P(lambda a: a > 12))
+        Persona(antiguedad=P(lambda a: a > 12)),
+        Persona(sueldo=MATCH.sueldo),
+        Persona(valor_propiedad=MATCH.valor_propiedad),
+        Persona(años_devolucion=MATCH.años_devolucion)
     ))
-    def prestamo_aprobado(self):
-        self.prestamo_aprobado.append("✅ Prestamo Aprobado")
+    def prestamo_aprobado(self, sueldo, valor_propiedad, años_devolucion):
+        monto = valor_propiedad
+        tasa_mensual = (6 / 100) / 12
+        cantidad_cuotas = int(años_devolucion) * 12
+        cuota = (monto * tasa_mensual * (1 + tasa_mensual) ** cantidad_cuotas) / ((1 + tasa_mensual) ** cantidad_cuotas - 1)
+        maximo_permitido = sueldo * 0.25
+
+        if cuota <= maximo_permitido:
+           self.prestamo_aprobado.append("✅ Préstamo Aprobado")
+           self.prestamo_aprobado.append(f"🧾 Cantidad de cuotas: {cantidad_cuotas}")
+           self.prestamo_aprobado.append(f"💰 Cuota mensual estimada: ${round(cuota, 2)}")
+        else:
+            self.errores.append(f"❌ Has superado el maximo permitido por cuota")
+
