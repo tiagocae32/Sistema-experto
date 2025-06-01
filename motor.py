@@ -11,9 +11,9 @@ class MotorCredito(KnowledgeEngine):
         self.prestamo_aprobado = []
 
 
-    @Rule(Persona(edad=P(lambda e: e is not None and e < 18)))
+    @Rule(Persona(edad=P(lambda e: e is not None and (e < 18 or e > 80))))
     def es_menor(self):
-        self.errores.append("❌ Es menor de edad.")
+        self.errores.append("❌ No cumples con el requisito de la edad.")
     
     @Rule(Persona(sueldo=P(lambda s: s is not None and s < 1000)))
     def sueldo_menor(self):
@@ -43,4 +43,3 @@ class MotorCredito(KnowledgeEngine):
            self.prestamo_aprobado.append(f"💰 Cuota mensual estimada: ${round(cuota, 2)}")
         else:
             self.errores.append(f"❌ Has superado el maximo permitido por cuota")
-
