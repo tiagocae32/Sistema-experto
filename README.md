@@ -57,3 +57,7 @@ app.py: Contiene la clase SistemaExperto que maneja la interfaz de usuario de St
 motor.py: Define la clase MotorCredito, que hereda de KnowledgeEngine de Experta e implementa las reglas de negocio para la evaluación del crédito.
 
 utils.py: Contiene funciones de utilidad, como to_int para convertir cadenas a enteros de forma segura.
+
+## Url Deploy
+
+https://sistema-experto-2uzzennqwtbwpd4vrsmkbu.streamlit.app/
