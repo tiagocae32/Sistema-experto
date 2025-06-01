@@ -18,18 +18,20 @@ class SistemaExperto():
         edad_str = st.text_input("Edad")
         antiguedad_str = st.text_input("Antigüedad en su trabajo (meses)")
         sueldo_str = st.text_input("Sueldo")
+        tipo_trabajo = st.selectbox("Tipo de trabajo", ["En relacion de dependencia", "Monotributo", "Informal"])
         valor_propiedad_str = st.text_input('Valor Propiedad')
         años_devolucion_str = st.selectbox("¿En cuántos años querés devolver el préstamo?", ["20", "25", "30"])
-        return nombre, edad_str, antiguedad_str, sueldo_str, valor_propiedad_str, años_devolucion_str
+        return nombre, edad_str, antiguedad_str, sueldo_str, tipo_trabajo, valor_propiedad_str, años_devolucion_str
 
 
-    def evaluar_credito(self,nombre, edad_str, antiguedad_str, sueldo_str, valor_propiedad_str, años_devolucion_str):
+    def evaluar_credito(self,nombre, edad_str, antiguedad_str, sueldo_str, tipo_trabajo, valor_propiedad_str, años_devolucion_str):
         campos = {
             "edad": to_int(edad_str),
             "sueldo": to_int(sueldo_str),
             "valor_propiedad": to_int(valor_propiedad_str),
             "antiguedad": to_int(antiguedad_str),
-            "nombre": nombre.strip()
+            "nombre": nombre.strip(),
+            "tipo_trabajo" : tipo_trabajo
         }
 
         # Validacion de campos
@@ -42,6 +44,7 @@ class SistemaExperto():
             nombre=campos["nombre"],
             edad=campos["edad"],
             sueldo=campos["sueldo"],
+            tipo_trabajo=campos['tipo_trabajo'],
             valor_propiedad=campos["valor_propiedad"],
             antiguedad=campos["antiguedad"],
             años_devolucion=años_devolucion_str
@@ -51,10 +54,10 @@ class SistemaExperto():
 
     def main(self):
         self.set_titles()
-        nombre, edad_str, antiguedad_str, sueldo_str, valor_propiedad_str, años_devolucion_str = self.get_inputs()
+        nombre, edad_str, antiguedad_str, sueldo_str, tipo_trabajo, valor_propiedad_str, años_devolucion_str = self.get_inputs()
 
         if st.button("Evaluar"):
-            errores, prestamo_aprobado = self.evaluar_credito(nombre, edad_str, antiguedad_str, sueldo_str, valor_propiedad_str, años_devolucion_str)
+            errores, prestamo_aprobado = self.evaluar_credito(nombre, edad_str, antiguedad_str, sueldo_str, tipo_trabajo, valor_propiedad_str, años_devolucion_str)
             st.subheader("Resultado")
             if len(errores) > 0:
                 for error in errores:
