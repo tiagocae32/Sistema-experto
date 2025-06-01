@@ -29,7 +29,7 @@ class MotorCredito(KnowledgeEngine):
     
         
     @Rule(AND(
-        Persona(edad=P(lambda e: e > 18)),
+        Persona(edad=P(lambda e: e > 18 and e < 80)),
         Persona(antiguedad=P(lambda a: a > 12)),
         Persona(sueldo=MATCH.sueldo),
         Persona(tipo_trabajo=MATCH.tipo_trabajo),
