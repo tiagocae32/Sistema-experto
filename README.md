@@ -1,5 +1,4 @@
 ## Sistema Experto de Evaluación de Créditos Hipotecarios
-
 Este proyecto implementa un sistema experto para evaluar solicitudes de créditos hipotecarios utilizando Streamlit para la interfaz de usuario y Experta para el motor de inferencia basado en reglas.
 
 ## Descripción
@@ -59,5 +58,4 @@ motor.py: Define la clase MotorCredito, que hereda de KnowledgeEngine de Experta
 utils.py: Contiene funciones de utilidad, como to_int para convertir cadenas a enteros de forma segura.
 
 ## Url Deploy
-
 https://sistema-experto-2uzzennqwtbwpd4vrsmkbu.streamlit.app/
