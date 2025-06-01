@@ -11,21 +11,22 @@ class MotorCredito(KnowledgeEngine):
         self.prestamo_aprobado = []
 
 
-    @Rule(Persona(edad=P(lambda e: e is not None and (e < 18 or e > 80))))
+    @Rule(Persona(edad=P(lambda e: e is not None and (e < 18 or e > 80))), salience=10)
     def es_menor(self):
         self.errores.append("❌ No cumples con el requisito de la edad.")
     
-    @Rule(Persona(sueldo=P(lambda s: s is not None and s < 1000)))
+    @Rule(Persona(sueldo=P(lambda s: s is not None and s < 1000)), salience=9)
     def sueldo_menor(self):
         self.errores.append("❌ No cumples con el sueldo minimo.")
+
+    @Rule(Persona(tipo_trabajo=P(lambda tt: tt == 'Informal')), salience=8)
+    def tipo_trabajo(self):
+        self.errores.append("❌ Debes estar en relacion de dependencia o ser monotributista.")
     
-    @Rule(Persona(antiguedad=P(lambda a: a is not None and a < 12)))
+    @Rule(Persona(antiguedad=P(lambda a: a is not None and a < 12)), salience=7)
     def antiguedad_menor(self):
         self.errores.append("❌ No cumples con la antigüedad mínima.")
     
-    @Rule(Persona(tipo_trabajo=P(lambda tt: tt == 'Informal')))
-    def tipo_trabajo(self):
-        self.errores.append("❌ Debes estar en relacion de dependencia o ser monotributista.")
         
     @Rule(AND(
         Persona(edad=P(lambda e: e > 18)),
