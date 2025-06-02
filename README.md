@@ -36,7 +36,7 @@ La cuota mensual calculada no debe superar el 25% del sueldo del solicitante.
 Para ejecutar este sistema experto en tu máquina local, sigue los siguientes pasos:
 
 ## Clonar el repositorio (o guardar los archivos):
-Asegúrate de tener los archivos app.py, motor.py, utils.py y persona.py en la misma carpeta. Para este ejemplo, asumiremos que el archivo principal se llama app.py y contiene la clase SistemaExperto, y que motor.py contiene MotorCredito y persona.py contiene Persona.
+Asegúrate de tener los archivos app.py, motor.py y utils.py en la misma carpeta. Para este ejemplo, asumiremos que el archivo principal se llama app.py y contiene la clase SistemaExperto, y que motor.py contiene MotorCredito.
 
 ## Instalar las dependencias:
 Necesitarás streamlit y experta. Puedes instalarlas usando pip:
