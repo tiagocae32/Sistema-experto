@@ -16,10 +16,10 @@ class SistemaExperto():
     def get_inputs(self):
         nombre = st.text_input("Nombre")
         edad_str = st.text_input("Edad")
-        antiguedad_str = st.text_input("Antigüedad en su trabajo (meses)")
+        antiguedad_str = st.text_input("Años de antigüedad en su trabajo")
         sueldo_str = st.text_input("Sueldo")
         tipo_trabajo = st.selectbox("Tipo de trabajo", ["En relacion de dependencia", "Monotributo", "Informal"])
-        valor_propiedad_str = st.text_input('Valor Propiedad')
+        valor_propiedad_str = st.text_input('Valor Propiedad (en pesos)')
         años_devolucion_str = st.selectbox("¿En cuántos años querés devolver el préstamo?", ["20", "25", "30"])
         return nombre, edad_str, antiguedad_str, sueldo_str, tipo_trabajo, valor_propiedad_str, años_devolucion_str
 

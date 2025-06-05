@@ -23,14 +23,14 @@ class MotorCredito(KnowledgeEngine):
     def tipo_trabajo(self):
         self.errores.append("❌ Debes estar en relacion de dependencia o ser monotributista.")
     
-    @Rule(Persona(antiguedad=P(lambda a: a is not None and a < 12)), salience=7)
+    @Rule(Persona(antiguedad=P(lambda a: a is not None and a < 3)), salience=7)
     def antiguedad_menor(self):
         self.errores.append("❌ No cumples con la antigüedad mínima.")
     
         
     @Rule(AND(
         Persona(edad=P(lambda e: e > 18 and e < 80)),
-        Persona(antiguedad=P(lambda a: a > 12)),
+        Persona(antiguedad=P(lambda a: a > 2)),
         Persona(sueldo=MATCH.sueldo),
         Persona(tipo_trabajo=MATCH.tipo_trabajo),
         Persona(valor_propiedad=MATCH.valor_propiedad),
@@ -42,11 +42,13 @@ class MotorCredito(KnowledgeEngine):
         tasa_mensual = (tasa_interes / 100) / 12
         cantidad_cuotas = int(años_devolucion) * 12
         cuota = (monto * tasa_mensual * (1 + tasa_mensual) ** cantidad_cuotas) / ((1 + tasa_mensual) ** cantidad_cuotas - 1)
+        monto_total_a_devolver_uva = (cuota * cantidad_cuotas) / 1494.11
         maximo_permitido = sueldo * 0.25
 
         if cuota <= maximo_permitido:
            self.prestamo_aprobado.append("✅ Préstamo Aprobado")
            self.prestamo_aprobado.append(f"🧾 Cantidad de cuotas: {cantidad_cuotas}")
+           self.prestamo_aprobado.append(f"💰 Cantidad en UVA: {round(monto_total_a_devolver_uva, 2)}")
            self.prestamo_aprobado.append(f"💰 Cuota mensual estimada: ${round(cuota, 2)}")
         else:
             self.errores.append(f"❌ Has superado el maximo permitido por cuota")
