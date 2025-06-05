@@ -11,7 +11,7 @@ Motor de Reglas: Utiliza la librería Experta para aplicar reglas de negocio en 
 
 Validación de Requisitos: Evalúa la edad, antigüedad laboral, sueldo y tipo de trabajo del solicitante.
 
-Cálculo de Cuota: Si el crédito es aprobado, calcula la cuota mensual estimada basándose en el valor de la propiedad, la tasa de interés (que varía según el tipo de trabajo) y el plazo de devolución.
+Cálculo de Cuota: Si el crédito es aprobado, calcula la cuota mensual estimada basándose en el valor(en pesos) de la propiedad, la cantidad de UVA, la tasa de interés (que varía según el tipo de trabajo) y el plazo de devolución.
 
 ## Reglas de Negocio
 El motor de reglas (MotorCredito) aplica las siguientes validaciones y cálculos:
@@ -22,7 +22,7 @@ Sueldo Mínimo: El sueldo debe ser igual o superior a $1000.
 
 Tipo de Trabajo: El solicitante debe estar "En relación de dependencia" o ser "Monotributista". No se aprueban créditos para trabajos "Informales".
 
-Antigüedad Laboral: El solicitante debe tener una antigüedad mínima de 12 meses en su trabajo actual.
+Antigüedad Laboral: El solicitante debe tener una antigüedad mínima de 3 años en su trabajo actual.
 
 Aprobación de Préstamo:
 
