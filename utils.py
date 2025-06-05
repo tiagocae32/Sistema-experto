@@ -9,7 +9,7 @@ def to_int(value):
 def get_interes_banco(opcion):
     tasas_interes_bancos = {
         "Banco Nacion Si " : 4.72,
-        "Bacnp Nacion No" : 8.41,
+        "Banco Nacion No" : 8.41,
         "Banco ICBC Si" : 9.27,
         "Banco ICBC No" : 11.02
     }
