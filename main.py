@@ -25,7 +25,7 @@ class SistemaExperto():
             valor_propiedad_str = st.text_input("Valor Propiedad (en pesos)")
             años_devolucion_str = st.selectbox(
                 "Plazo del prestamo (años)",
-                ["20", "30"],
+                ["10","20", "30"],
                 index=0
             )
             banco_elegido = st.selectbox("Seleccione un banco", ["Banco Nacion", "Banco ICBC"], index=0)
