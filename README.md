@@ -36,22 +36,20 @@ La cuota mensual calculada no debe superar el 25% del sueldo del solicitante.
 Para ejecutar este sistema experto en tu máquina local, sigue los siguientes pasos:
 
 ## Clonar el repositorio (o guardar los archivos):
-Asegúrate de tener los archivos app.py, motor.py y utils.py en la misma carpeta. Para este ejemplo, asumiremos que el archivo principal se llama app.py y contiene la clase SistemaExperto, y que motor.py contiene MotorCredito.
+Asegúrate de tener los archivos main.py, motor.py y utils.py en la misma carpeta. Para este ejemplo, asumiremos que el archivo principal se llama main.py y contiene la clase SistemaExperto, y que motor.py contiene MotorCredito.
 
-## Instalar las dependencias:
-Necesitarás streamlit y experta. Puedes instalarlas usando pip:
+## Construir imagen de docker:
+Parado sobre el root del proyecto, en la terminal ejecuta el siguiente comando.
+docker build -t sistema-experto .
 
-pip install streamlit experta
+## Ejecutar la aplicación
+docker run -p 8501:8501 sistema-experto
 
-## Ejecutar la aplicación:
-Abre tu terminal, navega hasta la carpeta donde guardaste los archivos y ejecuta el siguiente comando:
-
-streamlit run app.py
-
-Esto abrirá la aplicación en tu navegador web por defecto.
+Esto levantará la aplicación y podrás acceder desde tu navegador en:
+http://localhost:8501
 
 ## Estructura del Código
-app.py: Contiene la clase SistemaExperto que maneja la interfaz de usuario de Streamlit y orquesta la evaluación del crédito.
+main.py: Contiene la clase SistemaExperto que maneja la interfaz de usuario de Streamlit y orquesta la evaluación del crédito.
 
 motor.py: Define la clase MotorCredito, que hereda de KnowledgeEngine de Experta e implementa las reglas de negocio para la evaluación del crédito.
 
