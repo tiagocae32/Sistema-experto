@@ -39,7 +39,8 @@ Para ejecutar este sistema experto en tu máquina local, sigue los siguientes pa
 Asegúrate de tener los archivos main.py, motor.py y utils.py en la misma carpeta. Para este ejemplo, asumiremos que el archivo principal se llama main.py y contiene la clase SistemaExperto, y que motor.py contiene MotorCredito.
 
 ## Construir imagen de docker:
-Parado sobre el root del proyecto, en la terminal ejecuta el siguiente comando.
+Parado sobre el root del proyecto, en la terminal ejecuta el siguiente comando:
+
 docker build -t sistema-experto .
 
 ## Ejecutar la aplicación
