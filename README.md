@@ -41,20 +41,27 @@ Asegúrate de tener los archivos main.py, motor.py y utils.py en la misma carpet
 ## Construir imagen de docker:
 Parado sobre el root del proyecto, en la terminal ejecuta el siguiente comando:
 
+```bash
 docker build -t sistema-experto .
+```
 
 ## Ejecutar la aplicación
+```bash
 docker run --name sistema-experto -p 8501:8501 sistema-experto
+```
 
 Esto levantará la aplicación y podrás acceder desde tu navegador en:
 http://localhost:8501
 
 ## Alternativa Docker Hub
+
 Crearse una cuenta si es que no se tiene
-docker login -> para loguearse
-docker pull tiagocae32/sistema-experto:firstappdockerse
-docker run --name sistema-experto -p 8501:8501 tiagocae32/sistema-experto:firstappdockerse
-Une vez que ya esta creado el contenedor -> docker start sistema-experto
+
+```bash
+docker login    # para loguearse
+docker pull tiagocae32/sistema-experto:latest
+docker run --name sistema-experto -p 8501:8501 tiagocae32/sistema-experto:latest
+```
 
 ## Estructura del Código
 main.py: Contiene la clase SistemaExperto que maneja la interfaz de usuario de Streamlit y orquesta la evaluación del crédito.
