@@ -59,8 +59,8 @@ Crearse una cuenta si es que no se tiene
 
 ```bash
 docker login    # para loguearse
-docker pull tiagocae32/sistema-experto:firstappdockerse
-docker run --name sistema-experto -p 8501:8501 tiagocae32/sistema-experto:firstappdockerse
+docker pull tiagocae32/sistema-experto:latest
+docker run --name sistema-experto -p 8501:8501 tiagocae32/sistema-experto:latest
 ```
 
 ## Estructura del Código
