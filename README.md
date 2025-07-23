@@ -41,10 +41,14 @@ Asegúrate de tener los archivos main.py, motor.py y utils.py en la misma carpet
 ## Construir imagen de docker:
 Parado sobre el root del proyecto, en la terminal ejecuta el siguiente comando:
 
+```bash
 docker build -t sistema-experto .
+```
 
 ## Ejecutar la aplicación
+```bash
 docker run --name sistema-experto -p 8501:8501 sistema-experto
+```
 
 Esto levantará la aplicación y podrás acceder desde tu navegador en:
 http://localhost:8501
