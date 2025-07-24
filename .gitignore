@@ -1,4 +1,3 @@
-.gitignore
 # Python
 /venv
 __pycache__
